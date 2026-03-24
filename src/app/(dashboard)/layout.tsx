@@ -1,6 +1,8 @@
 import { AuthProvider } from '@/components/auth-provider'
 import Sidebar from '@/components/sidebar'
 
+export const dynamic = 'force-dynamic'
+
 export default function DashboardGroupLayout({
   children,
 }: {
