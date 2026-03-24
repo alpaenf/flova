@@ -54,13 +54,32 @@ export default function InputPage() {
   }, [])
 
   const handleMultipleChange = (stageName: string, field: 'start' | 'end', value: string) => {
-    setMultipleData(prev => ({
-      ...prev,
-      [stageName]: {
-        ...prev[stageName],
-        [field]: value
+    setMultipleData(prev => {
+      const newData = {
+        ...prev,
+        [stageName]: {
+          ...prev[stageName],
+          [field]: value
+        }
       }
-    }))
+
+      // Autofill logic: if end time is filled, auto-fill the start time of the next stage
+      if (field === 'end' && value) {
+        const stageIndex = stages.findIndex(s => s.name === stageName)
+        if (stageIndex >= 0 && stageIndex < stages.length - 1) {
+          const nextStage = stages[stageIndex + 1]
+          // Only auto-fill if the next stage's start time is currently empty
+          if (!newData[nextStage.name]?.start) {
+            newData[nextStage.name] = {
+              ...newData[nextStage.name],
+              start: value
+            }
+          }
+        }
+      }
+
+      return newData
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
