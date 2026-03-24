@@ -134,22 +134,22 @@ export default function SettingsPage() {
       <div className="bg-surface rounded-2xl p-6 border border-border-light shadow-sm animate-fade-in">
         <h3 className="text-base font-semibold text-text mb-4">Tambah Tahap Layanan</h3>
 
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             value={newStageName}
             onChange={(e) => setNewStageName(e.target.value)}
             placeholder="Nama tahap baru (contoh: Registrasi)"
             onKeyDown={(e) => e.key === 'Enter' && addStage()}
-            className="flex-1 px-4 py-3 rounded-xl border border-border bg-surface-alt text-text placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm"
+            className="flex-1 w-full min-w-0 px-4 py-3 rounded-xl border border-border bg-surface-alt text-text placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm"
           />
           <button
             onClick={addStage}
             disabled={saving || !newStageName.trim()}
-            className="flex items-center justify-center p-3 bg-primary hover:bg-primary-dark text-white rounded-xl disabled:opacity-50 shadow-lg shadow-primary/25 cursor-pointer flex-shrink-0"
+            className="flex items-center justify-center p-3 bg-primary hover:bg-primary-dark text-white rounded-xl disabled:opacity-50 shadow-lg shadow-primary/25 cursor-pointer flex-shrink-0 w-full sm:w-auto"
           >
             <Plus className="w-5 h-5 sm:mr-2" />
-            <span className="hidden sm:inline font-medium">Tambah</span>
+            <span className="inline sm:inline font-medium">Tambah</span>
           </button>
         </div>
 
