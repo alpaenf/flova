@@ -1,26 +1,295 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+/* ============================================
+   CSS Variables
+   ============================================ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-primary: #2563EB;
+  --color-primary-light: #3B82F6;
+  --color-primary-dark: #1D4ED8;
+  --color-primary-50: #EFF6FF;
+  --color-primary-100: #DBEAFE;
+  --color-danger: #EF4444;
+  --color-danger-light: #FCA5A5;
+  --color-danger-50: #FEF2F2;
+  --color-success: #22C55E;
+  --color-success-light: #86EFAC;
+  --color-success-50: #F0FDF4;
+  --color-warning: #F59E0B;
+  --color-warning-50: #FFFBEB;
+  --color-surface: #FFFFFF;
+  --color-surface-alt: #F8FAFC;
+  --color-surface-hover: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-border-light: #F1F5F9;
+  --color-text: #0F172A;
+  --color-text-secondary: #475569;
+  --color-text-muted: #94A3B8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ============================================
+   Base Styles
+   ============================================ */
+html { height: 100%; }
+
+body {
+  min-height: 100%;
+  background-color: #F8FAFC;
+  color: #0F172A;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ============================================
+   Transitions
+   ============================================ */
+*, *::before, *::after {
+  transition-property: color, background-color, border-color, box-shadow, opacity, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.7; }
+}
+
+@keyframes navSlideDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-fade-in  { animation: fadeIn 0.4s ease-out forwards; }
+.animate-slide-in { animation: slideInRight 0.3s ease-out forwards; }
+.animate-pulse-slow { animation: pulse-slow 2s ease-in-out infinite; }
+
+/* ============================================
+   Custom Utilities
+   ============================================ */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0,0,0,0.08), 0 4px 10px -6px rgba(0,0,0,0.04);
 }
+
+/* ============================================
+   Scroll Reveal System
+   ============================================ */
+.sr-base {
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.sr-up    { opacity: 0; transform: translateY(32px); }
+.sr-left  { opacity: 0; transform: translateX(-32px); }
+.sr-right { opacity: 0; transform: translateX(32px); }
+.sr-none  { opacity: 0; }
+
+.sr-visible {
+  opacity: 1 !important;
+  transform: translate(0, 0) !important;
+}
+
+/* ============================================
+   Bottom Navbar Animation
+   ============================================ */
+@keyframes bottomNavSlideUp {
+  from { opacity: 0; transform: translateY(100%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bottom-nav-enter {
+  animation: bottomNavSlideUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes navIconBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  40%       { transform: translateY(-4px) scale(1.15); }
+  70%       { transform: translateY(1px) scale(0.95); }
+}
+
+.nav-icon-active {
+  animation: navIconBounce 0.4s ease forwards;
+}
+
+
+.glass {
+  background: rgba(255,255,255,0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #2563EB, #7C3AED);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shadow-t-lg { box-shadow: 0 -4px 20px rgba(0,0,0,0.06); }
+
+.recharts-tooltip-wrapper { outline: none !important; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 2px #DBEAFE;
+}
+
+/* ============================================
+   Splash Screen
+   ============================================ */
+.splash-root {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f1e3c 0%, #1D4ED8 50%, #1e3a5f 100%);
+  overflow: hidden;
+}
+
+/* Animated background blobs */
+.splash-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: splashBlobMove 4s ease-in-out infinite alternate;
+}
+.splash-blob-1 {
+  width: 500px; height: 500px;
+  top: -150px; right: -100px;
+  background: rgba(99,102,241,0.35);
+  animation-delay: 0s;
+}
+.splash-blob-2 {
+  width: 400px; height: 400px;
+  bottom: -100px; left: -80px;
+  background: rgba(37,99,235,0.4);
+  animation-delay: -2s;
+}
+
+@keyframes splashBlobMove {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(30px, -30px) scale(1.08); }
+}
+
+/* Center container */
+.splash-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+  animation: splashPopIn 0.6s cubic-bezier(0.16,1,0.3,1) both;
+}
+
+@keyframes splashPopIn {
+  from { opacity: 0; transform: scale(0.85) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Pulsing rings */
+.splash-ring {
+  position: absolute;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.12);
+  animation: splashRingPulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+.splash-ring-2 {
+  width: 260px; height: 260px;
+  animation-delay: 0.5s;
+  border-color: rgba(255,255,255,0.06);
+}
+
+@keyframes splashRingPulse {
+  0%   { transform: scale(0.9); opacity: 0.6; }
+  50%  { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+/* Logo box */
+.splash-logo-box {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 24px;
+  padding: 20px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 1;
+}
+
+.splash-logo {
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+  animation: splashLogoBreathe 2s ease-in-out infinite;
+}
+
+@keyframes splashLogoBreathe {
+  0%, 100% { opacity: 0.9; }
+  50%       { opacity: 1; }
+}
+
+/* Tagline */
+.splash-tagline {
+  color: rgba(255,255,255,0.5);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* Progress bar */
+.splash-bar-wrap {
+  width: 160px;
+  height: 3px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.splash-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa);
+  border-radius: 99px;
+  transition: width 0.05s linear;
+  box-shadow: 0 0 8px rgba(96,165,250,0.6);
+}
+
