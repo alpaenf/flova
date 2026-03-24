@@ -7,6 +7,8 @@ import { Eye, EyeOff, UserPlus, CheckCircle } from 'lucide-react'
 import Image from 'next/image'
 import { AuthBackground, DotMatrix, CircleRings } from '@/components/svg-decorations'
 
+export const dynamic = 'force-dynamic'
+
 export default function RegisterPage() {
   const [fullName, setFullName] = useState('')
   const [email, setEmail] = useState('')
