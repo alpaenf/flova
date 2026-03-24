@@ -146,10 +146,10 @@ export default function SettingsPage() {
           <button
             onClick={addStage}
             disabled={saving || !newStageName.trim()}
-            className="flex items-center gap-2 px-5 py-3 bg-primary hover:bg-primary-dark text-white font-medium rounded-xl disabled:opacity-50 shadow-lg shadow-primary/25 cursor-pointer"
+            className="flex items-center justify-center p-3 bg-primary hover:bg-primary-dark text-white rounded-xl disabled:opacity-50 shadow-lg shadow-primary/25 cursor-pointer flex-shrink-0"
           >
-            <Plus className="w-4 h-4" />
-            Tambah
+            <Plus className="w-5 h-5 sm:mr-2" />
+            <span className="hidden sm:inline font-medium">Tambah</span>
           </button>
         </div>
 

@@ -30,23 +30,23 @@ export default async function LandingPage() {
       <nav className="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4" style={{ animation: 'navSlideDown 0.6s cubic-bezier(0.16,1,0.3,1) both' }}>
         <div className="bg-white/80 backdrop-blur-xl border border-gray-200/80 shadow-xl shadow-black/5 rounded-full px-4 py-2.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-2.5">
-            <Image src="/logo.png" alt="FLOVA" width={100} height={32} className="h-8 w-auto object-contain" priority />
+            <Image src="/logo.png" alt="FLOVA" width={100} height={32} className="h-6 md:h-8 w-auto object-contain" priority />
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-500">
             <a href="#fitur" className="hover:text-primary transition-colors">Fitur</a>
             <a href="#cara-kerja" className="hover:text-primary transition-colors">Cara Kerja</a>
             <a href="#manfaat" className="hover:text-primary transition-colors">Manfaat</a>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 md:gap-2">
             <Link
               href="/login"
-              className="text-sm font-medium text-gray-600 hover:text-primary px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors"
+              className="text-xs md:text-sm font-medium text-gray-600 hover:text-primary px-2 md:px-3 py-1.5 rounded-full hover:bg-gray-100 transition-colors whitespace-nowrap"
             >
               Masuk
             </Link>
             <Link
               href="/register"
-              className="text-sm font-semibold bg-primary text-white px-5 py-2 rounded-full shadow-md shadow-primary/25 hover:bg-primary-dark transition-all hover:scale-105"
+              className="text-xs md:text-sm font-semibold bg-primary text-white px-3 md:px-5 py-1.5 md:py-2 rounded-full shadow-md shadow-primary/25 hover:bg-primary-dark transition-all hover:scale-105 whitespace-nowrap"
             >
               Mulai Gratis
             </Link>
